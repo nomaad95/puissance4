@@ -37,3 +37,7 @@ tab(3),afficheLigne([A5,B5,C5,D5,E5,F5,G5]),nl,
 tab(3),afficheLigne([A6,B6,C6,D6,E6,F6,G6]).
 
 
+/**********************************************************************************************/
+
+afficheLigneR([]):-write("|").
+afficheLigneR([T|Q]):-write("|"), tab(1), write(T), tab(1), afficheLigneR(Q).

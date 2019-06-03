@@ -4,4 +4,4 @@ write(T), tab(4), afficherLigne(Q).
 
 afficherGrille([]).
 afficherGrille([T|Q]):-
-afficherLigne([T]), nl, afficherLigne(Q).
+afficherLigne(T), nl, afficherGrille(Q).

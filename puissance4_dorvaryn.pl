@@ -127,7 +127,7 @@ jouerCoupO(G):- write('Joueur o, entrez un numero de colonne : '),
 				write('Erreur merci de saisir un chiffre\n'),jouerCoupO(G).
 
 % Lancement du jeu : grille de depart de 6*7 (vide). C est le joueur o qui commence, suivi par x, jusqu à ce que l un des deux gagne [ou GRILLE PLEINE]
-jouer:- jouerCoupO([[],[],[],[],[],[],[]]).
+jouer:- random(0,2,R),R=:=1->jouerCoupO([[],[],[],[],[],[],[]]);jouerCoupX([[],[],[],[],[],[],[]]).
 
 %Un coup gagnant est un coup qui mene à un etat de jeu ou le joueur est vainqueur
 coupGagnant(C,G,J):- enregistrerCoupIA(1,G,J,N,G), finJeu(N,J), C=1.
@@ -210,7 +210,7 @@ jouerCoupJoueur(G):- write('Joueur x, entrez un numero de colonne : '),
 				write('\n'),
 				jouerIA(X).
 
-lancerIA:- jouerIA([[],[],[],[],[],[],[]]).
+lancerIA:- random(0,2,R),R=:=1->jouerCoupJoueur([[],[],[],[],[],[],[]]);jouerIA([[],[],[],[],[],[],[]]).
 
 enregistrerCoupArbre(1, [L|G], J, [[J|L]|G]):- longueur(L,N), N < 6.
 enregistrerCoupArbre(N, [T|X], J, [T|G]):- 	N > 0,

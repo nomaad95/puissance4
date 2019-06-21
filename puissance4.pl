@@ -261,19 +261,23 @@ evalGrille(G, J, X) :- evalHor(G,J,P1),
 					evalVert(G, J, P2),	
 					max(P1,P2, X).								
 										
-afficherGrille(_,0).							   
-afficherGrille(G, N):-	 N > 0,
-						N1 is N-1,
-						maplist(nthElem(N), G, L),
-						afficherListe(L),
-						write('\n'),
-						afficherGrille(G, N1).
+afficherGrille(_,0).
+afficherGrille(G, N):-   N > 0,
+	N1 is N-1,
+	maplist(nthElem(N), G, L),
+	afficherListe(L),
+	write('\n'),
+	afficherLigne(7),
+	write('\n'),
+	afficherGrille(G, N1).
 
 afficherGrille(G):- afficherGrille(G,6).
- 
+
 afficherListe([]):- write('|').
-afficherListe([E|L]):-  write('|'), 
-						afficherElement(E),
-						afficherListe(L).
+afficherListe([E|L]):-  write('|'),
+afficherElement(E),
+afficherListe(L).
+afficherLigne(0):-!.
+afficherLigne(B):- write(' '), write('-'), B1 is B-1, afficherLigne(B1).
 afficherElement([]):- write(' '),!.
 afficherElement(E):- write(E).

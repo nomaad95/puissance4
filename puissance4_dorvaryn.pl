@@ -6,6 +6,8 @@ max(X,Y,X).
 ajoutFin(X,[],[X]).
 ajoutFin(X,[Y|L1],[Y|L2]):- ajoutFin(X,L1,L2).
 
+%fonction qui retourne le dernier élément d'une liste
+/* Paramètres : L liste, E élement retourné */
 finListe([], _).
 finListe(L, E):- last(L,E).
 
@@ -47,7 +49,7 @@ enregistrerCoupJoueur(N, [T|X], J, [T|G], I):- 	N > 0,
 enregistrerCoupIA(1, [L|G], J, F, I):- longueur(L,N), N < 6, ajoutFin(J,L,M), F=[M|G].
 enregistrerCoupIA(N, [T|X], J, [T|G], I):- 	N > 0,
 										N1 is N-1,
-										enregistrerCoupIA(N1, X, J, G, I).
+										enregistrerCoupIA(N1, X, J, G, I). 
 % Condition de victoire verticale : 4 jetons les uns après les autres sur une même colonne
 /* Paramètres : G grille, J joueur */										
 finJeuVert([L|_],J):- sublist([J,J,J,J], L),!.

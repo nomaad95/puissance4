@@ -211,10 +211,10 @@ jouerIA(G):- jouerIA(1,G).
 jouerIA(G):- jouerIA(0,G).
 
 jouerCoupJoueur(G):- write('Joueur x, entrez un numero de colonne : '),
-				read(N), enregistrerCoupJoueur(N,G, x, X, G),
+				read(N), number(N)-> enregistrerCoupJoueur(N,G, x, X, G),
 				afficherGrille(X),
 				write('\n'),
-				jouerIA(X).
+				jouerIA(X); write("'Erreur merci de saisir un chiffre\n'"), jouerCoupJoueur(G).
 
 lancerIA:- random(0,2,R),R=:=1->jouerCoupJoueur([[],[],[],[],[],[],[]]);jouerIA([[],[],[],[],[],[],[]]).
 

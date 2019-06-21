@@ -29,7 +29,12 @@ nthElem(N, L, []):- longueur(L, N1), N1 < N.
 nthElem(N, L, X):- nth1(N, L, X).				
 
 % Fonction qui enregistre un coup joue dans la grille
-/* Paramètres : N numero de la colonne dans laquelle J joue, G grille, J joueur, NG nouvelle grille */		
+% Paramètres : N numero de la colonne dans laquelle J joue, G grille, J joueur, NG nouvelle grille 
+/* On vérifie que le coup joué fait partie du tableau (1 <= N <= 7 ) 
+ * et que le nombre de pions posés dans une colonne n'est pas plus grand que 6. 
+ * Si la valeur saisi n'est pas comprise dans le tablea ou que la colonne est pleine 
+ * --> le programme retourne une erreur et redemande la saisie
+ */	
 enregistrerCoup(1, [L|G], x, _, I):- longueur(L,N), N >= 6, write('Coup Invalide\n'), jouerCoupX(I).
 enregistrerCoup(1, [L|G], o, _, I):- longueur(L,N), N >= 6, write('Coup Invalide\n'), jouerCoupO(I).
 enregistrerCoup(1, [L|G], J, F, I):- longueur(L,N), N < 6, ajoutFin(J,L,M), F=[M|G].
@@ -45,6 +50,7 @@ enregistrerCoupJoueur(N, [L|G], x, _, I):- N > 7, write('Coup Invalide\n'), joue
 enregistrerCoupJoueur(N, [T|X], J, [T|G], I):- 	N > 0,
 										N1 is N-1,
 										enregistrerCoupJoueur(N1, X, J, G, I).
+
 
 enregistrerCoupIA(1, [L|G], J, F, I):- longueur(L,N), N < 6, ajoutFin(J,L,M), F=[M|G].
 enregistrerCoupIA(N, [T|X], J, [T|G], I):- 	N > 0,
@@ -65,7 +71,7 @@ finJeuHor(N, G, J):- N > 0,
 
 finJeuHor(G,J):- finJeuHor(6, G, J).				 
 
-% Condition de victoire horizontale : 4 jetons les uns après les autres sur une même ligne
+% Conditions de victoire diagonale : 4 jetons aligés sur une même diagonale
 /* Paramètres : N numero de la ligne à partir duquel on traite, G grille, J joueur */
 uneFinDiag(G,D,J,0):- sublist([J,J,J,J],D).
 uneFinDiag(G,D,J,N):- N > 0,

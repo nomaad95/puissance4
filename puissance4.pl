@@ -1,3 +1,4 @@
+% Réalisé par Victor Morgant, Baptiste Ingoglia, Camille Bamboute 
 % Fonction renvoyant le maximum de deux nombres
 max(X,Y,Y) :- Y>X, !.
 max(X,Y,X). 
@@ -218,10 +219,6 @@ jouerCoupJoueur(G):- write('Joueur x, entrez un numero de colonne : '),
 
 lancerIA:- random(0,2,R),R=:=1->jouerCoupJoueur([[],[],[],[],[],[],[]]);jouerIA([[],[],[],[],[],[],[]]).
 
-enregistrerCoupArbre(1, [L|G], J, [[J|L]|G]):- longueur(L,N), N < 6.
-enregistrerCoupArbre(N, [T|X], J, [T|G]):- 	N > 0,
-										N1 is N-1,
-										enregistrerCoupArbre(N1, X, J, G).
 % Evaluation de la grille de jeu
 /* Paramètres : G grille, J joueur */
 evalVert([], _, P, X):- X=P, write(fini).										

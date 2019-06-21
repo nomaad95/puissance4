@@ -114,15 +114,17 @@ gagnant(J):-write('Le Joueur '), write(J), write(' a gagne !').
 jouerCoupX(G):-finJeu(G,J), gagnant(J),!.
 jouerCoupO(G):-finJeu(G,J), gagnant(J),!.
 jouerCoupX(G):- write('Joueur x, entrez un numero de colonne : '),
-				read(N), enregistrerCoup(N,G, x, X, G),
+				read(N), number(N)-> enregistrerCoup(N,G, x, X, G),
 				afficherGrille(X),
 				write('\n'),
-				jouerCoupO(X).
+				jouerCoupO(X);
+				write('Erreur merci de saisir un chiffre\n'),jouerCoupX(G).
 jouerCoupO(G):- write('Joueur o, entrez un numero de colonne : '),
-				read(N), enregistrerCoup(N,G, o, X, G),
+				read(N),number(N)-> enregistrerCoup(N,G, o, X, G),
 				afficherGrille(X),
 				write('\n'),
-				jouerCoupX(X).
+				jouerCoupX(X);
+				write('Erreur merci de saisir un chiffre\n'),jouerCoupO(G).
 
 % Lancement du jeu : grille de depart de 6*7 (vide). C est le joueur o qui commence, suivi par x, jusqu à ce que l un des deux gagne [ou GRILLE PLEINE]
 jouer:- jouerCoupO([[],[],[],[],[],[],[]]).
